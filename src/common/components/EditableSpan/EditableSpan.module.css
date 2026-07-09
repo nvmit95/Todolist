@@ -1,0 +1,21 @@
+.text {
+  display: block;
+  flex: 1;
+  min-width: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  word-break: break-word;
+  white-space: pre-wrap;
+  cursor: default;
+  padding-top: 7px;
+}
+
+.done {
+  text-decoration: line-through;
+  color: var(--mui-palette-text-secondary);
+}
+
+.editField {
+  flex: 1;
+  min-width: 0;
+}

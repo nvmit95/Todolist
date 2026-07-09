@@ -4,7 +4,7 @@ import {
   useUpdateTodolistTitleMutation,
 } from "@/features/todolists/api/todolistsApi"
 import type { DomainTodolist } from "@/features/todolists/lib/types"
-import DeleteIcon from "@mui/icons-material/Delete"
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import IconButton from "@mui/material/IconButton"
 import styles from "./TodolistTitle.module.css"
 
@@ -25,12 +25,17 @@ export const TodolistTitle = ({ todolist }: Props) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} todolist-title-divider`}>
       <h3>
         <EditableSpan value={title} onChange={changeTodolistTitle} />
       </h3>
-      <IconButton onClick={deleteTodolist}>
-        <DeleteIcon />
+      <IconButton
+        onClick={deleteTodolist}
+        size="small"
+        className={`${styles.deleteBtn} todolist-delete-btn`}
+        aria-label="Delete list"
+      >
+        <DeleteOutlineIcon fontSize="small" />
       </IconButton>
     </div>
   )

@@ -22,11 +22,12 @@ export const TasksPagination = ({ totalCount, page, setPage }: Props) => {
         page={page}
         onChange={changePage}
         shape="rounded"
-        color="primary"
-        className={styles.pagination}
+        className={`${styles.pagination} todolist-pagination`}
       />
       <div className={styles.totalCount}>
-        <Typography variant="caption">Total: {totalCount}</Typography>
+        <Typography variant="caption" className="todolist-total-count">
+          Total: {totalCount}
+        </Typography>
       </div>
     </>
   )

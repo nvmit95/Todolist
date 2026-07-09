@@ -29,4 +29,5 @@ export type UpdateTaskModel = {
   priority: TaskPriority
   startDate: string | null
   deadline: string | null
+  order: number
 }

@@ -11,15 +11,18 @@ import { AUTH_TOKEN } from "@/common/constants"
 import { ResultCode } from "@/common/enums"
 import { useAppDispatch, useAppSelector } from "@/common/hooks"
 import { containerSx } from "@/common/styles"
-import { getTheme } from "@/common/theme"
 import { useLogoutMutation } from "@/features/auth/api/authApi"
-import MenuIcon from "@mui/icons-material/Menu"
+import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined"
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined"
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline"
 import AppBar from "@mui/material/AppBar"
 import Container from "@mui/material/Container"
 import IconButton from "@mui/material/IconButton"
 import LinearProgress from "@mui/material/LinearProgress"
-import Switch from "@mui/material/Switch"
 import Toolbar from "@mui/material/Toolbar"
+import Typography from "@mui/material/Typography"
+import Tooltip from "@mui/material/Tooltip"
+import styles from "./Header.module.css"
 
 export const Header = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
@@ -29,8 +32,6 @@ export const Header = () => {
   const [logout] = useLogoutMutation()
 
   const dispatch = useAppDispatch()
-
-  const theme = getTheme(themeMode)
 
   const changeMode = () => {
     dispatch(changeThemeModeAC({ themeMode: themeMode === "light" ? "dark" : "light" }))
@@ -50,20 +51,35 @@ export const Header = () => {
   }
 
   return (
-    <AppBar position="static" sx={{ mb: "30px" }}>
-      <Toolbar>
-        <Container maxWidth={"lg"} sx={containerSx}>
-          <IconButton color="inherit">
-            <MenuIcon />
-          </IconButton>
-          <div>
-            {isLoggedIn && <NavButton onClick={logoutHandler}>Sign out</NavButton>}
-            <NavButton background={theme.palette.primary.dark}>Faq</NavButton>
-            <Switch color={"default"} onChange={changeMode} />
+    <AppBar position="sticky" sx={{ mb: "24px" }}>
+      <Toolbar disableGutters>
+        <Container maxWidth="lg" sx={containerSx}>
+          <div className={styles.brand}>
+            <CheckCircleOutlineIcon className={styles.logo} />
+            <Typography variant="h6" className={styles.brandName}>
+              TodoList
+            </Typography>
+          </div>
+
+          <div className={styles.actions}>
+            {isLoggedIn && (
+              <NavButton onClick={logoutHandler} variant="outlined">
+                Sign out
+              </NavButton>
+            )}
+            <Tooltip title={themeMode === "light" ? "Dark mode" : "Light mode"}>
+              <IconButton onClick={changeMode} color="inherit" aria-label="Toggle theme">
+                {themeMode === "light" ? (
+                  <DarkModeOutlinedIcon fontSize="small" />
+                ) : (
+                  <LightModeOutlinedIcon fontSize="small" />
+                )}
+              </IconButton>
+            </Tooltip>
           </div>
         </Container>
       </Toolbar>
-      {status === "loading" && <LinearProgress />}
+      {status === "loading" && <LinearProgress color="primary" />}
     </AppBar>
   )
 }

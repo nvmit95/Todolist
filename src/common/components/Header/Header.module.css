@@ -1,0 +1,25 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  color: #6366f1;
+  font-size: 1.75rem !important;
+}
+
+.brandName {
+  font-weight: 700 !important;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

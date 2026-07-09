@@ -1,15 +1,23 @@
 import TextField from "@mui/material/TextField"
-import { type ChangeEvent, useState } from "react"
+import { type ChangeEvent, useEffect, useState } from "react"
+import styles from "./EditableSpan.module.css"
 
 type Props = {
   value: string
   onChange: (title: string) => void
   disabled?: boolean
+  isDone?: boolean
 }
 
-export const EditableSpan = ({ value, onChange, disabled }: Props) => {
+export const EditableSpan = ({ value, onChange, disabled, isDone }: Props) => {
   const [title, setTitle] = useState(value)
   const [isEditMode, setIsEditMode] = useState(false)
+
+  useEffect(() => {
+    if (!isEditMode) {
+      setTitle(value)
+    }
+  }, [value, isEditMode])
 
   const turnOnEditMode = () => {
     if (disabled) return
@@ -25,20 +33,29 @@ export const EditableSpan = ({ value, onChange, disabled }: Props) => {
     setTitle(event.currentTarget.value)
   }
 
+  if (isEditMode) {
+    return (
+      <TextField
+        variant="outlined"
+        value={title}
+        size="small"
+        fullWidth
+        multiline
+        maxRows={4}
+        onChange={changeTitle}
+        onBlur={turnOffEditMode}
+        autoFocus
+        className={`${styles.editField} todolist-edit-input`}
+      />
+    )
+  }
+
   return (
-    <>
-      {isEditMode ? (
-        <TextField
-          variant={"outlined"}
-          value={title}
-          size={"small"}
-          onChange={changeTitle}
-          onBlur={turnOffEditMode}
-          autoFocus
-        />
-      ) : (
-        <span onDoubleClick={turnOnEditMode}>{value}</span>
-      )}
-    </>
+    <span
+      className={`${styles.text} ${isDone ? styles.done : ""}`}
+      onDoubleClick={turnOnEditMode}
+    >
+      {value}
+    </span>
   )
 }

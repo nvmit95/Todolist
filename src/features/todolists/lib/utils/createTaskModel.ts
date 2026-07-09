@@ -7,5 +7,6 @@ export const createTaskModel = (task: DomainTask, domainModel: Partial<UpdateTas
   description: task.description,
   priority: task.priority,
   startDate: task.startDate,
+  order: task.order,
   ...domainModel,
 })

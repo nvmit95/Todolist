@@ -1,4 +1,24 @@
 .container {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--list-accent-border);
+}
+
+.container h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.deleteBtn {
+  opacity: 0;
+  transition: opacity 0.2s ease, color 0.2s ease !important;
+}
+
+.container:hover .deleteBtn {
+  opacity: 1;
 }

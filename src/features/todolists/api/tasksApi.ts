@@ -61,40 +61,37 @@ export const tasksApi = baseApi.injectEndpoints({
       }),
       onQueryStarted: async (
         { todolistId, taskId, model },
-        { dispatch, queryFulfilled,  },
+        { dispatch, queryFulfilled, getState },
       ) => {
-
-
-        // const args = tasksApi.util.selectCachedArgsForQuery(
-        //   getState(),
-        //   "getTasks",
-        // )
-        debugger
-
-        const patchResult = dispatch(
-          tasksApi.util.updateQueryData(
-            "getTasks",
-            { id: todolistId, params: { page: 1 } },
-            (response) => {
-
-              const index = response.items.findIndex(
-                (task) => task.id === taskId,
-              )
-              if (index !== -1) {
-                response.items[index] = { ...response.items[index], ...model }
-              }
-            },
-          ),
+        const cachedArgs = tasksApi.util.selectCachedArgsForQuery(
+          getState(),
+          "getTasks",
         )
+
+        const patchResults = cachedArgs
+          .filter((args) => args.id === todolistId)
+          .map((args) =>
+            dispatch(
+              tasksApi.util.updateQueryData("getTasks", args, (response) => {
+                const index = response.items.findIndex(
+                  (task) => task.id === taskId,
+                )
+                if (index !== -1) {
+                  response.items[index] = {
+                    ...response.items[index],
+                    ...model,
+                  }
+                }
+              }),
+            ),
+          )
+
         try {
           await queryFulfilled
-        } catch (error) {
-          patchResult.undo()
+        } catch {
+          patchResults.forEach((patch) => patch.undo())
         }
       },
-      invalidatesTags: (_result, _error, { todolistId }) => [
-        { type: "Task", id: todolistId },
-      ],
     }),
   }),
 })

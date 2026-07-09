@@ -7,19 +7,24 @@ import {
 import type { DomainTask } from "@/features/todolists/api/tasksApi.types"
 import { DomainTodolist } from "@/features/todolists/lib/types"
 import { createTaskModel } from "@/features/todolists/lib/utils"
-import DeleteIcon from "@mui/icons-material/Delete"
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline"
 import Checkbox from "@mui/material/Checkbox"
 import IconButton from "@mui/material/IconButton"
-import ListItem from "@mui/material/ListItem"
-import type { ChangeEvent } from "react"
+import Box from "@mui/material/Box"
+import type { ChangeEvent, PointerEvent } from "react"
 import { getListItemSx } from "./TaskItem.styles"
 
 type Props = {
   task: DomainTask
   todolist: DomainTodolist
+  isDragging?: boolean
 }
 
-export const TaskItem = ({ task, todolist }: Props) => {
+const stopDrag = (e: PointerEvent) => {
+  e.stopPropagation()
+}
+
+export const TaskItem = ({ task, todolist, isDragging }: Props) => {
   const [removeTask] = useRemoveTaskMutation()
   const [updateTask] = useUpdateTaskMutation()
 
@@ -43,14 +48,32 @@ export const TaskItem = ({ task, todolist }: Props) => {
   const isTaskCompleted = task.status === TaskStatus.Completed
 
   return (
-    <ListItem sx={getListItemSx(isTaskCompleted)}>
-      <div>
-        <Checkbox checked={isTaskCompleted} onChange={changeTaskStatus} />
-        <EditableSpan value={task.title} onChange={changeTaskTitle} />
+    <Box
+      sx={getListItemSx(isTaskCompleted, isDragging)}
+      className="task-item"
+    >
+      <div className="task-item__content">
+        <Checkbox
+          checked={isTaskCompleted}
+          onChange={changeTaskStatus}
+          onPointerDown={stopDrag}
+          size="small"
+        />
+        <EditableSpan
+          value={task.title}
+          onChange={changeTaskTitle}
+          isDone={isTaskCompleted}
+        />
       </div>
-      <IconButton onClick={deleteTask}>
-        <DeleteIcon />
+      <IconButton
+        onClick={deleteTask}
+        onPointerDown={stopDrag}
+        size="small"
+        className="task-item__delete todolist-delete-btn"
+        aria-label="Delete task"
+      >
+        <DeleteOutlineIcon fontSize="small" />
       </IconButton>
-    </ListItem>
+    </Box>
   )
 }

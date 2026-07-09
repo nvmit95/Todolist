@@ -1,0 +1,23 @@
+.main {
+  padding-bottom: 48px;
+}
+
+.hero {
+  margin-bottom: 28px;
+}
+
+.title {
+  background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 0.9375rem;
+}
+
+.createSection {
+  margin-bottom: 32px;
+}

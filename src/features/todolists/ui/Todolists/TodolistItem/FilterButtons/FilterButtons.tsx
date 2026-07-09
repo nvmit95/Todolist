@@ -1,13 +1,19 @@
 import { useAppDispatch } from "@/common/hooks"
-import { containerSx } from "@/common/styles"
-import { todolistsApi } from "@/features/todolists/api/todolistsApi"
 import type { DomainTodolist, FilterValues } from "@/features/todolists/lib/types"
+import { todolistsApi } from "@/features/todolists/api/todolistsApi"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
+import styles from "./FilterButtons.module.css"
 
 type Props = {
   todolist: DomainTodolist
 }
+
+const filters: { value: FilterValues; label: string }[] = [
+  { value: "all", label: "All" },
+  { value: "active", label: "Active" },
+  { value: "completed", label: "Done" },
+]
 
 export const FilterButtons = ({ todolist }: Props) => {
   const { id, filter } = todolist
@@ -26,24 +32,19 @@ export const FilterButtons = ({ todolist }: Props) => {
   }
 
   return (
-    <Box sx={containerSx}>
-      <Button variant={filter === "all" ? "outlined" : "text"} color={"inherit"} onClick={() => changeFilter("all")}>
-        All
-      </Button>
-      <Button
-        variant={filter === "active" ? "outlined" : "text"}
-        color={"primary"}
-        onClick={() => changeFilter("active")}
-      >
-        Active
-      </Button>
-      <Button
-        variant={filter === "completed" ? "outlined" : "text"}
-        color={"secondary"}
-        onClick={() => changeFilter("completed")}
-      >
-        Completed
-      </Button>
+    <Box className={`${styles.container} todolist-filters`}>
+      {filters.map(({ value, label }) => (
+        <Button
+          key={value}
+          className={`todolist-filter-btn ${styles.filterBtn} ${
+            filter === value ? `todolist-filter-btn--active ${styles.active}` : ""
+          }`}
+          onClick={() => changeFilter(value)}
+          disableRipple
+        >
+          {label}
+        </Button>
+      ))}
     </Box>
   )
 }

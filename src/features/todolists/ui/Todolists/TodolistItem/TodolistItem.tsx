@@ -1,9 +1,9 @@
 import { CreateItemForm } from "@/common/components/CreateItemForm/CreateItemForm"
 import { useAddTaskMutation } from "@/features/todolists/api/tasksApi"
 import type { DomainTodolist } from "@/features/todolists/lib/types"
-import { FilterButtons } from "./FilterButtons/FilterButtons"
 import { Tasks } from "./Tasks/Tasks"
 import { TodolistTitle } from "./TodolistTitle/TodolistTitle"
+import styles from "./TodolistItem.module.css"
 
 type Props = {
   todolist: DomainTodolist
@@ -17,11 +17,10 @@ export const TodolistItem = ({ todolist }: Props) => {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <TodolistTitle todolist={todolist} />
-      <CreateItemForm onCreateItem={createTask} />
+      <CreateItemForm onCreateItem={createTask} variant="todolist" />
       <Tasks todolist={todolist} />
-      <FilterButtons todolist={todolist} />
     </div>
   )
 }

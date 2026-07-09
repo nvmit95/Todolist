@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  padding: 4px;
+  border-radius: 12px;
+}
+
+.filterBtn {
+  flex: 1;
+  border-radius: 8px !important;
+  padding: 6px 12px !important;
+  font-size: 0.8125rem !important;
+  font-weight: 500 !important;
+  color: var(--mui-palette-text-secondary) !important;
+  text-transform: none !important;
+  min-width: 0 !important;
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.active {
+  background: var(--mui-palette-background-paper) !important;
+  font-weight: 600 !important;
+}

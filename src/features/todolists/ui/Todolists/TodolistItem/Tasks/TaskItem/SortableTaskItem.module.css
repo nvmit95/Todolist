@@ -1,0 +1,8 @@
+.root {
+  touch-action: none;
+  cursor: grab;
+}
+
+.root:active {
+  cursor: grabbing;
+}

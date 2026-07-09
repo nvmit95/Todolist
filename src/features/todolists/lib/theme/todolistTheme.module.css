@@ -1,0 +1,122 @@
+/**
+ * Единый источник стилей, привязанных к --list-accent*.
+ * Класс .themed вешается на корень карточки тудулиста.
+ */
+.themed {
+  --list-accent: #6366f1;
+  --list-accent-light: rgba(99, 102, 241, 0.1);
+  --list-accent-border: rgba(99, 102, 241, 0.25);
+  --list-section-gap: 16px;
+}
+
+/* ── Разделители ── */
+.themed :global(.todolist-title-divider) {
+  border-bottom-color: var(--list-accent-border) !important;
+}
+
+.themed :global(.todolist-footer-divider) {
+  border-top-color: var(--list-accent-border) !important;
+}
+
+/* ── Поле добавления задачи / списка ── */
+.themed :global(.todolist-add-input .MuiInputLabel-root.Mui-focused),
+.themed :global(.todolist-add-input .MuiInputLabel-root.MuiInputLabel-shrink) {
+  color: var(--list-accent) !important;
+}
+
+.themed :global(.todolist-add-input .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline) {
+  border-color: var(--list-accent-border) !important;
+}
+
+.themed :global(.todolist-add-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
+  border-color: var(--list-accent) !important;
+  border-width: 2px;
+}
+
+/* ── Checkbox ── */
+.themed :global(.MuiCheckbox-root) {
+  color: var(--list-accent-border) !important;
+}
+
+.themed :global(.MuiCheckbox-root.Mui-checked) {
+  color: var(--list-accent) !important;
+}
+
+.themed :global(.MuiCheckbox-root:hover) {
+  background-color: var(--list-accent-light) !important;
+  border-radius: 50%;
+}
+
+/* ── Кнопка «+» ── */
+.themed :global(.todolist-add-btn) {
+  background: var(--list-accent) !important;
+  box-shadow: 0 2px 8px var(--list-accent-border) !important;
+}
+
+.themed :global(.todolist-add-btn:hover) {
+  filter: brightness(1.08);
+  box-shadow: 0 4px 14px var(--list-accent-border) !important;
+}
+
+/* ── Inline-редактирование задачи ── */
+.themed :global(.todolist-edit-input .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline) {
+  border-color: var(--list-accent) !important;
+}
+
+/* ── Пагинация ── */
+.themed :global(.todolist-pagination .MuiPaginationItem-root.Mui-selected) {
+  background-color: var(--list-accent) !important;
+  color: #fff !important;
+}
+
+.themed :global(.todolist-pagination .MuiPaginationItem-root.Mui-selected:hover) {
+  background-color: var(--list-accent) !important;
+  filter: brightness(1.08);
+}
+
+.themed :global(.todolist-pagination .MuiPaginationItem-root:hover) {
+  background-color: var(--list-accent-light) !important;
+}
+
+.themed :global(.todolist-total-count) {
+  color: var(--list-accent) !important;
+}
+
+/* ── Фильтры ── */
+.themed :global(.todolist-filters) {
+  background: var(--list-accent-light);
+}
+
+.themed :global(.todolist-filters .todolist-filter-btn:hover) {
+  background: var(--list-accent-light) !important;
+}
+
+.themed :global(.todolist-filters .todolist-filter-btn--active) {
+  color: var(--list-accent) !important;
+  box-shadow: 0 1px 4px var(--list-accent-border) !important;
+}
+
+/* ── Empty state ── */
+.themed :global(.todolist-empty-icon) {
+  color: var(--list-accent) !important;
+}
+
+/* ── Кнопки удаления (задача / тудулист) ── */
+.themed :global(.todolist-delete-btn) {
+  color: var(--list-accent-border) !important;
+  transition: background-color 0.2s ease, color 0.2s ease !important;
+}
+
+.themed :global(.todolist-delete-btn:hover) {
+  color: #fff !important;
+  background-color: var(--list-accent) !important;
+}
+
+.themed :global(.todolist-delete-btn:hover .MuiSvgIcon-root) {
+  color: #fff !important;
+}
+
+/* ── Заголовок списка ── */
+.themed :global(.todolist-title-divider h3) {
+  color: var(--list-accent) !important;
+}
