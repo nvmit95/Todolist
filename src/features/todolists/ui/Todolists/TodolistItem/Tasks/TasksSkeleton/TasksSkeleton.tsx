@@ -1,19 +1,25 @@
-import { containerSx } from "@/common/styles"
-import Box from "@mui/material/Box"
+import { Task_Count } from "@/common/constants"
 import Skeleton from "@mui/material/Skeleton"
+import styles from "./TasksSkeleton.module.css"
+
+const TASK_LINE_WIDTH = "65%"
 
 export const TasksSkeleton = () => (
-  <Box style={{ padding: "8px 0" }}>
-    {Array(4)
-      .fill(null)
-      .map((_, id) => (
-        <Box key={id} sx={containerSx}>
-          <Box sx={containerSx} style={{ gap: "15px" }}>
-            <Skeleton width={20} height={40} />
-            <Skeleton width={150} height={40} />
-          </Box>
-          <Skeleton width={20} height={40} />
-        </Box>
-      ))}
-  </Box>
+  <div className={styles.container}>
+    {Array.from({ length: Task_Count }, (_, id) => (
+      <div key={id} className={styles.taskRow}>
+        <Skeleton
+          variant="rounded"
+          width={20}
+          height={20}
+          sx={{ flexShrink: 0 }}
+        />
+        <Skeleton
+          variant="rounded"
+          height={14}
+          sx={{ width: TASK_LINE_WIDTH }}
+        />
+      </div>
+    ))}
+  </div>
 )

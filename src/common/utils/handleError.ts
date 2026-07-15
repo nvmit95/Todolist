@@ -22,7 +22,11 @@ export const handleError = (
         error = result.error.error
         break
       case 403:
-        error = "403 Forbidden Error. Check API-KEY"
+        if (isErrorWithMessage(result.error.data)) {
+          error = result.error.data.message
+        } else {
+          error = "403 Forbidden Error. Check API-KEY"
+        }
         break
       case 400:
         if (isErrorWithMessage(result.error.data)) {
@@ -70,6 +74,9 @@ export const handleError = (
       resultCode: ResultCode
       messages: string[]
     }
+
+    // "You are not authorized" from auth/me is expected for guests — no toast
+    if (api.endpoint === "me") return
 
     // 🔥 ОБРАБОТКА И Error И Captcha
     if (

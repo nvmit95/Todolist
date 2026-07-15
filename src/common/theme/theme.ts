@@ -88,6 +88,7 @@ const componentOverrides: ThemeOptions["components"] = {
             : "0 4px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(129, 140, 248, 0.08)",
         transition: "box-shadow 0.25s ease, transform 0.25s ease",
         "&:hover": {
+          transform: "translateY(-2px)",
           boxShadow:
             theme.palette.mode === "light"
               ? "0 8px 32px rgba(99, 102, 241, 0.14), 0 2px 8px rgba(0,0,0,0.06)"
@@ -170,6 +171,7 @@ const componentOverrides: ThemeOptions["components"] = {
 
 export const getTheme = (themeMode: ThemeMode) => {
   return createTheme({
+    cssVariables: true,
     palette: themeMode === "light" ? lightPalette : darkPalette,
     typography: sharedTypography,
     shape: { borderRadius: 12 },

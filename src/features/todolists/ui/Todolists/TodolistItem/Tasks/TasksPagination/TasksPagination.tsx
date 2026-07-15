@@ -1,6 +1,5 @@
 import { Task_Count } from "@/common/constants"
 import Pagination from "@mui/material/Pagination"
-import Typography from "@mui/material/Typography"
 import { ChangeEvent } from "react"
 import styles from "./TasksPagination.module.css"
 
@@ -16,19 +15,13 @@ export const TasksPagination = ({ totalCount, page, setPage }: Props) => {
   }
 
   return (
-    <>
-      <Pagination
-        count={Math.ceil(totalCount / Task_Count)}
-        page={page}
-        onChange={changePage}
-        shape="rounded"
-        className={`${styles.pagination} todolist-pagination`}
-      />
-      <div className={styles.totalCount}>
-        <Typography variant="caption" className="todolist-total-count">
-          Total: {totalCount}
-        </Typography>
-      </div>
-    </>
+    <Pagination
+      count={Math.ceil(totalCount / Task_Count)}
+      page={page}
+      onChange={changePage}
+      shape="rounded"
+      size="small"
+      className={`${styles.pagination} todolist-pagination`}
+    />
   )
 }

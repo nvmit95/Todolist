@@ -10,12 +10,14 @@ export const getListItemSx = (
   justifyContent: "space-between",
   alignItems: "flex-start",
   gap: 1,
+  cursor: "pointer",
   opacity: isDone ? 0.55 : 1,
   backgroundColor: isDragging ? "action.hover" : "transparent",
   border: "1px solid",
   borderColor: isDragging ? "var(--list-accent)" : "transparent",
   boxShadow: isDragging ? "0 4px 16px var(--list-accent-border)" : "none",
-  transition: "background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease",
+  transition:
+    "background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease",
   "&:hover": {
     backgroundColor: "action.hover",
     "& .task-item__delete": {
@@ -33,13 +35,13 @@ export const getListItemSx = (
     p: "4px",
     mt: "2px",
     flexShrink: 0,
-    cursor: "pointer",
+    cursor: "inherit",
   },
   "& .task-item__delete": {
     opacity: 0,
     transition: "opacity 0.2s ease",
     mt: "2px",
     flexShrink: 0,
-    cursor: "pointer",
+    cursor: "inherit",
   },
 })

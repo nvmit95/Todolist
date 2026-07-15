@@ -11,6 +11,10 @@
   --accent-light: #818cf8;
   --gradient-start: #6366f1;
   --gradient-end: #a855f7;
+
+  /* Fallbacks for CSS modules / IDE; MUI ThemeProvider overrides at runtime */
+  --mui-palette-text-secondary: #64748b;
+  --mui-palette-background-paper: #ffffff;
 }
 
 *,

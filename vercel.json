@@ -5,7 +5,11 @@
   "framework": "vite",
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/backend/(.*)",
+      "destination": "/api/bridge?path=$1"
+    },
+    {
+      "source": "/((?!backend/|api/).*)",
       "destination": "/index.html"
     }
   ]

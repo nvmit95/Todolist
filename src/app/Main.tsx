@@ -30,9 +30,7 @@ export const Main = () => {
         />
       </Grid>
 
-      <Grid container spacing={3} alignItems="stretch">
-        <Todolists />
-      </Grid>
+      <Todolists />
     </Container>
   )
 }

@@ -44,6 +44,7 @@ export const EditableSpan = ({ value, onChange, disabled, isDone }: Props) => {
         maxRows={4}
         onChange={changeTitle}
         onBlur={turnOffEditMode}
+        onPointerDown={(e) => e.stopPropagation()}
         autoFocus
         className={`${styles.editField} todolist-edit-input`}
       />

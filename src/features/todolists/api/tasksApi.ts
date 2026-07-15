@@ -11,11 +11,11 @@ export const tasksApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getTasks: build.query<
       GetTasksResponse,
-      { id: string; params: { page: number } }
+      { id: string; params: { page: number; count?: number } }
     >({
       query: ({ id, params }) => ({
         url: `todo-lists/${id}/tasks`,
-        params: { ...params, count: Task_Count },
+        params: { ...params, count: params.count ?? Task_Count },
         //{...достаю все переданные параметры + добавляю count}
       }),
       providesTags: (_result, _error, arg) => {

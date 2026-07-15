@@ -15,10 +15,16 @@
   color: var(--mui-palette-text-secondary) !important;
   text-transform: none !important;
   min-width: 0 !important;
-  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease !important;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease !important;
 }
 
 .active {
   background: var(--mui-palette-background-paper) !important;
   font-weight: 600 !important;
+  transform: scale(1.02);
+  box-shadow: 0 1px 4px var(--list-accent-border) !important;
 }

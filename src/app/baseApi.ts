@@ -7,27 +7,28 @@ export const baseApi = createApi({
 
   tagTypes: ["Todolist", "Task"],
 
-  keepUnusedDataFor: 10800, //3 часа
-  //время жизни кэша (по умолчанию 60 секунд)
+  keepUnusedDataFor: 10800,
 
   refetchOnFocus: true,
-  //после потери фокуса, при клике на страницу, подтягиваются данные
 
   refetchOnReconnect: true,
-  //после потери интернета, когда интернет подключается, подтягиваются данные
 
   baseQuery: async (args, api, extraOptions) => {
+    // Local: direct SamuraiJS URL from .env (CORS allows localhost).
+    // Production: /backend → Vercel Function api/bridge (see vercel.json).
+    const baseUrl = import.meta.env.PROD
+      ? "/backend/"
+      : import.meta.env.VITE_BASE_URL
+
     const result = await fetchBaseQuery({
-      baseUrl: import.meta.env.VITE_BASE_URL,
-      credentials: "include",
+      baseUrl,
+      credentials: "omit",
       headers: {
         "API-KEY": import.meta.env.VITE_API_KEY,
       },
       prepareHeaders: (headers) => {
-        headers.set(
-          "Authorization",
-          `Bearer ${localStorage.getItem(AUTH_TOKEN)}`,
-        )
+        const token = localStorage.getItem(AUTH_TOKEN)
+        if (token) headers.set("Authorization", `Bearer ${token}`)
       },
     })(args, api, extraOptions)
 

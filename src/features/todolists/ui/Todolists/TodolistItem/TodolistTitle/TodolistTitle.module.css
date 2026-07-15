@@ -1,12 +1,19 @@
 .container {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
   padding-bottom: 12px;
   border-bottom: 1px solid var(--list-accent-border);
 }
 
-.container h3 {
+.topRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.topRow h3 {
   font-size: 1.0625rem;
   font-weight: 700;
   flex: 1;
@@ -16,6 +23,7 @@
 
 .deleteBtn {
   opacity: 0;
+  margin-top: 2px;
   transition: opacity 0.2s ease, color 0.2s ease !important;
 }
 

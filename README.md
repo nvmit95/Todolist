@@ -1,6 +1,6 @@
 # TodoList
 
-> A production-grade task management SPA built as the capstone project of the [IT-Incubator](https://it-incubator.io) React course.
+> A portfolio task management SPA built as the capstone project of the [IT-Incubator](https://it-incubator.io) React course.
 
 Manage multiple todo lists, organize tasks with drag-and-drop, filter by status, and sync everything with a real REST API — all wrapped in a polished, responsive UI with dark mode support.
 
@@ -8,7 +8,16 @@ Manage multiple todo lists, organize tasks with drag-and-drop, filter by status,
 
 ## Live Demo
 
-> Deploy to [Vercel](https://vercel.com) and add the URL here.
+[https://todolist-beta-ruddy-85.vercel.app](https://todolist-beta-ruddy-85.vercel.app)
+
+### Demo credentials
+
+| | |
+|---|---|
+| **Email** | `178.kronos.178@gmail.com` |
+| **Password** | `TodolistDemo2026!@#` |
+
+Use these to sign in without creating an account.
 
 ---
 
@@ -23,10 +32,12 @@ Manage multiple todo lists, organize tasks with drag-and-drop, filter by status,
 
 | Variable | Value |
 |----------|-------|
-| `VITE_BASE_URL` | `https://social-network.samuraijs.com/api/1.1/` |
+| `VITE_BASE_URL` | `https://social-network.samuraijs.com/api/1.1/` (local only; production hardcodes `/backend/`) |
 | `VITE_API_KEY` | Your SamuraiJS API key |
 
-5. Deploy. Client-side routes (`/login`, etc.) are handled via SPA rewrites in `vercel.json`.
+> **Why `/backend` + `api/bridge.ts`?** For a normal Vite SPA, Vercel docs recommend SPA rewrites + (optionally) rewriting `/api` to an upstream. That is enough for most APIs. **SamuraiJS is not a normal API here:** browser POSTs that include `Origin: https://*.vercel.app` get **HTTP 403** (even with a valid API key). A plain rewrite still forwards `Origin`, so create/login fail. The small serverless bridge re-fetches SamuraiJS **without** `Origin` / cookies. Locally the browser still talks to SamuraiJS directly (`VITE_BASE_URL`) — CORS on `localhost` works.
+
+5. Deploy. Client-side routes (`/login`, etc.) are handled via SPA rewrites in `vercel.json`. After changing env vars, **redeploy** (Vite inlines `VITE_*` at build time).
 
 ### GitHub
 
@@ -60,8 +71,9 @@ git push origin main
 | **Authentication** | JWT login with captcha support, protected routes, session persistence |
 | **CRUD** | Full create / read / update / delete for todo lists and tasks |
 | **Drag & Drop** | Reorder tasks within a list using `@dnd-kit` with optimistic UI |
-| **Filtering** | All / Active / Done filters per list (client-side, instant) |
-| **Pagination** | Server-side task pagination with configurable page size |
+| **Filtering** | All / Active / Done per list. `All` uses server-paginated data; `Active` / `Done` load all tasks for the list, filter client-side, then paginate the result |
+| **Pagination** | Server-side for `All`; client-side for filtered views (page size configurable) |
+| **Task progress** | Completed / total progress bar in each list header |
 | **Optimistic Updates** | Instant UI feedback on task edits and list deletion, with automatic rollback on error |
 | **Dark Mode** | Light / dark theme toggle with custom MUI palette |
 | **Error Handling** | Global snackbar for API errors, loading indicator in header |
@@ -215,6 +227,6 @@ Final project of the IT-Incubator React/TypeScript course.
 
 ---
 
-## License
+## Credits
 
-MIT
+Favicon: **Stock Todo Icon** by **Gartoon Team** (Gartoon Redux Misc Icons), GPL. Commercial use allowed.
